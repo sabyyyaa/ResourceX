@@ -23,9 +23,9 @@ func Init() {
 	godotenv.Load(".env")
 	Db_name := os.Getenv("DB_NAME")
 	Db_user := os.Getenv("DB_USER")
-	Db_pass := os.Getenv("DB_PASS")
-	Port := os.Getenv("PORT")
-	Host := os.Getenv("HOST")
+	Db_pass := os.Getenv("DB_PASSWORD")
+	Port := os.Getenv("DB_PORT")
+	Host := os.Getenv("DB_HOST")
 	Ssl := os.Getenv("SSLMODE")
 
 	if Db_name == "" || Db_user == "" || Db_pass == "" || Port == "" || Host == "" || Ssl == "" {
