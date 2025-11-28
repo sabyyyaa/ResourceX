@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 
 	"book.com/internal/db"
 	"book.com/internal/models"
@@ -17,9 +18,10 @@ func main() {
 	r := gin.Default() //have pre-existing logger middleware
 
 	r.Use(cors.New(cors.Config{
-		AllowOrigins: []string{"*"},
-		AllowMethods: []string{"GET", "POST"},
-		AllowHeaders: []string{"Content-Type"},
+		AllowOrigins:     []string{"*"},
+		AllowMethods:     []string{"GET", "POST", "OPTIONS"},
+		AllowHeaders:     []string{"Content-Type", "Authorization"},
+		AllowCredentials: false,
 	}))
 
 	db.Init()
@@ -37,5 +39,10 @@ func main() {
 	// Routes
 	routes.SetupRoutes(r)
 
-	r.Run(":8080")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	r.Run(":" + port)
+
 }
