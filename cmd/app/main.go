@@ -8,12 +8,19 @@ import (
 	"book.com/internal/models"
 	"book.com/internal/routes"
 	"book.com/internal/storage"
+	"github.com/gin-contrib/cors"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	r := gin.Default() // pre-existing logger middleware
+	r := gin.Default() //have pre-existing logger middleware
+
+	r.Use(cors.New(cors.Config{
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{"GET", "POST"},
+		AllowHeaders: []string{"Content-Type"},
+	}))
 
 	db.Init()
 	if db.DB == nil {

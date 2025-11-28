@@ -1,3 +1,5 @@
+const API_BASE = "https://resourcex-wrny.onrender.com";
+
 document.getElementById("upload-form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -7,11 +9,8 @@ document.getElementById("upload-form").addEventListener("submit", async (e) => {
   const formData = new FormData(e.target);
 
   try {
-    const response = await fetch("/books/upload", {
+    const response = await fetch(`${API_BASE}/books/upload`, {
       method: "POST",
-      headers: {
-        "token": "authOK"
-      },
       body: formData,
     });
 
